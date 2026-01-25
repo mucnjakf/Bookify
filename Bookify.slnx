@@ -1,1 +1,3 @@
-<Solution />
+<Solution>
+  <Project Path="Bookify.Domain/Bookify.Domain.csproj" />
+</Solution>
