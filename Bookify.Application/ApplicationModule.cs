@@ -1,4 +1,5 @@
-﻿using Bookify.Domain.Bookings;
+﻿using Bookify.Application.Abstractions.Behaviors;
+using Bookify.Domain.Bookings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +15,8 @@ internal static class ApplicationModule
         {
             configure.LicenseKey = configuration["MediatR:LicenseKey"]!;
             configure.RegisterServicesFromAssembly(typeof(ApplicationModule).Assembly);
+
+            configure.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
 
         services.AddTransient<PricingService>();
