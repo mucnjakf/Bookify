@@ -9,7 +9,7 @@ public sealed class User : Entity
 
     internal LastName LastName { get; private set; }
 
-    internal Email Email { get; private set; }
+    public Email Email { get; private set; }
 
     private User(Guid id, FirstName firstName, LastName lastName, Email email) : base(id)
     {

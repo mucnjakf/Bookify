@@ -9,7 +9,7 @@ public sealed class Booking : Entity
 {
     internal Guid ApartmentId { get; private set; }
 
-    internal Guid UserId { get; private set; }
+    public Guid UserId { get; private set; }
 
     internal DateRange Duration { get; private set; }
 
