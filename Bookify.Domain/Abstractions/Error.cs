@@ -1,6 +1,6 @@
 ﻿namespace Bookify.Domain.Abstractions;
 
-internal sealed record Error(string Code, string Message)
+public sealed record Error(string Code, string Message)
 {
     internal static Error None = new(string.Empty, string.Empty);
 

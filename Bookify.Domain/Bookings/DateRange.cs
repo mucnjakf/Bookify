@@ -1,6 +1,6 @@
 ﻿namespace Bookify.Domain.Bookings;
 
-internal sealed record DateRange
+public sealed record DateRange
 {
     internal DateOnly Start { get; init; }
 
@@ -10,7 +10,7 @@ internal sealed record DateRange
 
     private DateRange() { }
 
-    internal static DateRange Create(DateOnly start, DateOnly end)
+    public static DateRange Create(DateOnly start, DateOnly end)
     {
         if (start > end)
         {

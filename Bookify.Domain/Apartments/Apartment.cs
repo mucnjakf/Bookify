@@ -3,7 +3,7 @@ using Bookify.Domain.Shared;
 
 namespace Bookify.Domain.Apartments;
 
-internal sealed class Apartment : Entity
+public sealed class Apartment : Entity
 {
     internal Name Name { get; private set; }
 

@@ -3,7 +3,7 @@ using Bookify.Domain.Users.Events;
 
 namespace Bookify.Domain.Users;
 
-internal sealed class User : Entity
+public sealed class User : Entity
 {
     internal FirstName FirstName { get; private set; }
 
@@ -18,7 +18,7 @@ internal sealed class User : Entity
         Email = email;
     }
 
-    public static User Create(FirstName firstName, LastName lastName, Email email)
+    internal static User Create(FirstName firstName, LastName lastName, Email email)
     {
         var user = new User(Guid.NewGuid(), firstName, lastName, email);
 

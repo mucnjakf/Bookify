@@ -2,13 +2,13 @@
 
 namespace Bookify.Domain.Bookings;
 
-internal static class BookingErrors
+public static class BookingErrors
 {
     internal static Error NotFound = new(
         "Booking.Found",
         "The booking with the specified ID was not found");
 
-    internal static Error Overlap = new(
+    public static Error Overlap = new(
         "Booking.Overlap",
         "The current booking is overlapping with an existing one");
 
