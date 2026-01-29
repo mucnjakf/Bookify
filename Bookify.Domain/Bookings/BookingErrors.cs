@@ -4,7 +4,7 @@ namespace Bookify.Domain.Bookings;
 
 public static class BookingErrors
 {
-    internal static Error NotFound = new(
+    public static Error NotFound = new(
         "Booking.Found",
         "The booking with the specified ID was not found");
 
