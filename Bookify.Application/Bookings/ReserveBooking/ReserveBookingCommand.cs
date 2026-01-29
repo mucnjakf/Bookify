@@ -4,6 +4,7 @@ using Bookify.Domain.Abstractions;
 using Bookify.Domain.Apartments;
 using Bookify.Domain.Bookings;
 using Bookify.Domain.Users;
+using FluentValidation;
 
 namespace Bookify.Application.Bookings.ReserveBooking;
 
@@ -59,5 +60,17 @@ internal sealed class ReserveBookingCommandHandler(
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success(booking.Id);
+    }
+}
+
+internal sealed class ReserveBookingCommandValidator : AbstractValidator<ReserveBookingCommand>
+{
+    public ReserveBookingCommandValidator()
+    {
+        RuleFor(command => command.UserId).NotEmpty();
+
+        RuleFor(command => command.ApartmentId).NotEmpty();
+
+        RuleFor(command => command.StartDate).LessThan(command => command.EndDate);
     }
 }
