@@ -7,7 +7,7 @@ using Dapper;
 
 namespace Bookify.Application.Bookings.GetBooking;
 
-internal sealed record GetBookingQuery(Guid BookingId) : IQuery<BookingResponse>;
+public sealed record GetBookingQuery(Guid BookingId) : IQuery<BookingResponse>;
 
 internal sealed class GetBookingQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
     : IQueryHandler<GetBookingQuery, BookingResponse>

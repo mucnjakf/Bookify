@@ -23,15 +23,17 @@ public sealed class Booking : Entity
 
     public BookingStatus Status { get; private set; }
 
-    internal DateTime CreatedOnUtc { get; private set; }
+    public DateTime CreatedOnUtc { get; private set; }
 
-    internal DateTime? ConfirmedOnUtc { get; private set; }
+    public DateTime? ConfirmedOnUtc { get; private set; }
 
-    internal DateTime? RejectedOnUtc { get; private set; }
+    public DateTime? RejectedOnUtc { get; private set; }
 
-    internal DateTime? CompletedOnUtc { get; private set; }
+    public DateTime? CompletedOnUtc { get; private set; }
 
-    internal DateTime? CancelledOnUtc { get; private set; }
+    public DateTime? CancelledOnUtc { get; private set; }
+
+    private Booking() { }
 
     private Booking(
         Guid id,

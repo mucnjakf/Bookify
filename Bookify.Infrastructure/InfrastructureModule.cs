@@ -17,9 +17,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Bookify.Infrastructure;
 
-internal static class InfrastructureModule
+public static class InfrastructureModule
 {
-    internal static IServiceCollection AddInfrastructureModule(
+    public static IServiceCollection AddInfrastructureModule(
         this IServiceCollection services,
         IConfiguration configuration)
     {

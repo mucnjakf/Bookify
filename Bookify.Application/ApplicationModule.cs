@@ -6,9 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Bookify.Application;
 
-internal static class ApplicationModule
+public static class ApplicationModule
 {
-    internal static IServiceCollection AddApplicationModule(
+    public static IServiceCollection AddApplicationModule(
         this IServiceCollection services,
         IConfiguration configuration)
     {

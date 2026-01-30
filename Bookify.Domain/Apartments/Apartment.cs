@@ -17,7 +17,9 @@ public sealed class Apartment : Entity
 
     public DateTime? LastBookedOnUtc { get; internal set; }
 
-    internal List<Amenity> Amenities { get; private set; }
+    public List<Amenity> Amenities { get; private set; }
+
+    private Apartment() { }
 
     internal Apartment(
         Guid id,

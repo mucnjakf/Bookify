@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="compose.yaml" />
+  </Folder>
+  <Project Path="Bookify.Api/Bookify.Api.csproj" />
   <Project Path="Bookify.Application/Bookify.Application.csproj" />
   <Project Path="Bookify.Domain/Bookify.Domain.csproj" />
   <Project Path="Bookify.Infrastructure/Bookify.Infrastructure.csproj" />

@@ -1,6 +1,6 @@
 ﻿namespace Bookify.Application.Bookings.GetBooking;
 
-internal sealed record BookingResponse
+public sealed record BookingResponse
 {
     public Guid Id { get; init; }
 

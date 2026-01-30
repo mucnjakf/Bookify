@@ -4,11 +4,11 @@ namespace Bookify.Domain.Abstractions;
 
 public class Result
 {
-    internal bool IsSuccess { get; }
+    public bool IsSuccess { get; }
 
-    internal bool IsFailure => !IsSuccess;
+    public bool IsFailure => !IsSuccess;
 
-    internal Error Error { get; }
+    public Error Error { get; }
 
     internal static Result Success() => new(true, Error.None);
 

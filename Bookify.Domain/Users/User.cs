@@ -11,6 +11,8 @@ public sealed class User : Entity
 
     public Email Email { get; private set; }
 
+    private User() { }
+
     private User(Guid id, FirstName firstName, LastName lastName, Email email) : base(id)
     {
         FirstName = firstName;

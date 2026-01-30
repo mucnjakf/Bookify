@@ -16,7 +16,9 @@ public sealed class Review : Entity
 
     public string Comment { get; private set; }
 
-    internal DateTime CreatedOnUtc { get; private set; }
+    public DateTime CreatedOnUtc { get; private set; }
+
+    private Review() { }
 
     private Review(
         Guid id,

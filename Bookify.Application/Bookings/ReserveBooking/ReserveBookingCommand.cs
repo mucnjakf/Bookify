@@ -9,7 +9,7 @@ using FluentValidation;
 
 namespace Bookify.Application.Bookings.ReserveBooking;
 
-internal sealed record ReserveBookingCommand(
+public sealed record ReserveBookingCommand(
     Guid ApartmentId,
     Guid UserId,
     DateOnly StartDate,
