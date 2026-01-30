@@ -6,9 +6,9 @@ public abstract class Entity(Guid id)
 
     private readonly List<IDomainEvent> _domainEvents = [];
 
-    internal IReadOnlyList<IDomainEvent> GetDomainEvents() => _domainEvents.ToList();
+    public IReadOnlyList<IDomainEvent> GetDomainEvents() => _domainEvents.ToList();
 
-    internal void ClearDomainEvents() => _domainEvents.Clear();
+    public void ClearDomainEvents() => _domainEvents.Clear();
 
     protected void RaiseDomainEvent(IDomainEvent domainEvent) => _domainEvents.Add(domainEvent);
 }
