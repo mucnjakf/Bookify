@@ -1,0 +1,30 @@
+﻿services:
+  bookify.api:
+    image: bookify.api
+    container_name: Bookify.Api
+    build:
+      context: .
+      dockerfile: Bookify.Api/Dockerfile
+    ports:
+      - "5001:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:8081
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/bookify.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+    volumes:
+      - ${USERPROFILE}/.aspnet/https:/https:ro
+    depends_on:
+      - bookify.db
+  
+  bookify.db:
+    image: postgres:17.2
+    container_name: Bookify.Db
+    environment:
+      POSTGRES_DB: bookify
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./.containers/postgres_data:/var/lib/postgresql/data
+    ports:
+      - "6543:5432"
