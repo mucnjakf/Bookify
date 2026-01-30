@@ -1,6 +1,6 @@
 ﻿namespace Bookify.Domain.Apartments;
 
-internal sealed record Address(
+public sealed record Address(
     string Country,
     string State,
     string ZipCode,

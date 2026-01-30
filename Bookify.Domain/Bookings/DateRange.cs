@@ -2,9 +2,9 @@
 
 public sealed record DateRange
 {
-    internal DateOnly Start { get; init; }
+    public DateOnly Start { get; private init; }
 
-    internal DateOnly End { get; init; }
+    public DateOnly End { get; private init; }
 
     internal int LengthInDays => End.DayNumber - Start.DayNumber;
 

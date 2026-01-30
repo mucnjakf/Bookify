@@ -21,7 +21,7 @@ public class Result
     internal static Result<TValue> Create<TValue>(TValue? value)
         => value is not null ? Success(value) : Failure<TValue>(Error.NullValue);
 
-    protected internal Result(bool isSuccess, Error error)
+    protected Result(bool isSuccess, Error error)
     {
         if ((isSuccess && error != Error.None) || (!isSuccess && error != Error.None))
         {
@@ -35,11 +35,11 @@ public class Result
 
 public sealed class Result<TValue> : Result
 {
-    protected internal Result(TValue? value, bool isSuccess, Error error) : base(isSuccess, error)
+    internal Result(TValue? value, bool isSuccess, Error error) : base(isSuccess, error)
         => Value = value;
 
     [NotNull]
-    internal TValue Value => IsSuccess
+    public TValue Value => IsSuccess
         ? field!
         : throw new InvalidOperationException("The value of a failure result cannot be accessed");
 

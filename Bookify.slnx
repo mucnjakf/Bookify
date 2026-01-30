@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="Bookify.Application/Bookify.Application.csproj" />
   <Project Path="Bookify.Domain/Bookify.Domain.csproj" />
+  <Project Path="Bookify.Infrastructure/Bookify.Infrastructure.csproj" />
 </Solution>

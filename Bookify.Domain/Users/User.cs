@@ -5,9 +5,9 @@ namespace Bookify.Domain.Users;
 
 public sealed class User : Entity
 {
-    internal FirstName FirstName { get; private set; }
+    public FirstName FirstName { get; private set; }
 
-    internal LastName LastName { get; private set; }
+    public LastName LastName { get; private set; }
 
     public Email Email { get; private set; }
 

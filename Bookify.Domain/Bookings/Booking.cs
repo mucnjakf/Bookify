@@ -7,21 +7,21 @@ namespace Bookify.Domain.Bookings;
 
 public sealed class Booking : Entity
 {
-    internal Guid ApartmentId { get; private set; }
+    public Guid ApartmentId { get; private set; }
 
     public Guid UserId { get; private set; }
 
-    internal DateRange Duration { get; private set; }
+    public DateRange Duration { get; private set; }
 
-    internal Money PriceForPeriod { get; private set; }
+    public Money PriceForPeriod { get; private set; }
 
-    internal Money CleaningFee { get; private set; }
+    public Money CleaningFee { get; private set; }
 
-    internal Money AmenitiesUpCharge { get; private set; }
+    public Money AmenitiesUpCharge { get; private set; }
 
-    internal Money TotalPrice { get; private set; }
+    public Money TotalPrice { get; private set; }
 
-    internal BookingStatus Status { get; private set; }
+    public BookingStatus Status { get; private set; }
 
     internal DateTime CreatedOnUtc { get; private set; }
 
@@ -61,7 +61,7 @@ public sealed class Booking : Entity
         DateTime utcNow,
         PricingService pricingService)
     {
-        PricingDetails pricingDetails = PricingService.CalculatePrice(apartment, duration);
+        PricingDetails pricingDetails = pricingService.CalculatePrice(apartment, duration);
 
         var booking = new Booking(
             Guid.NewGuid(),

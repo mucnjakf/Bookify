@@ -5,7 +5,7 @@ namespace Bookify.Domain.Bookings;
 
 public sealed class PricingService
 {
-    internal static PricingDetails CalculatePrice(Apartment apartment, DateRange period)
+    internal PricingDetails CalculatePrice(Apartment apartment, DateRange period)
     {
         Currency currency = apartment.Price.Currency;
 

@@ -2,7 +2,7 @@
 
 namespace Bookify.Domain.Shared;
 
-internal sealed record Money(decimal Amount, Currency Currency)
+public sealed record Money(decimal Amount, Currency Currency)
 {
     internal static Money Zero() => new(0, Currency.None);
 
