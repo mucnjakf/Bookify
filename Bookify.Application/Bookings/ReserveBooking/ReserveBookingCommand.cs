@@ -71,7 +71,7 @@ internal sealed class ReserveBookingCommandHandler(
     }
 }
 
-internal sealed class ReserveBookingCommandValidator : AbstractValidator<ReserveBookingCommand>
+public sealed class ReserveBookingCommandValidator : AbstractValidator<ReserveBookingCommand>
 {
     public ReserveBookingCommandValidator()
     {
