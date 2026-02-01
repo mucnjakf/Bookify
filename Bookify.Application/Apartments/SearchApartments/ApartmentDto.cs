@@ -1,6 +1,6 @@
 ﻿namespace Bookify.Application.Apartments.SearchApartments;
 
-public sealed record ApartmentResponse
+public sealed record ApartmentDto
 {
     public Guid Id { get; init; }
 
@@ -12,5 +12,5 @@ public sealed record ApartmentResponse
 
     public required string Currency { get; init; }
 
-    public required AddressResponse Address { get; set; }
+    public required AddressDto Address { get; set; }
 }

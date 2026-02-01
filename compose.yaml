@@ -28,3 +28,15 @@
       - ./.containers/postgres_data:/var/lib/postgresql/data
     ports:
       - "6543:5432"
+  
+  bookify.idp:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: Bookify.Idp
+    command: start-dev
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    volumes:
+      - ./.containers/identity_data:/opt/keycloak/data
+    ports:
+      - "18080:8080"

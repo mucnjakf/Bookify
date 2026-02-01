@@ -8,10 +8,10 @@ using Dapper;
 namespace Bookify.Application.Apartments.SearchApartments;
 
 public sealed record SearchApartmentsQuery(DateOnly StartDate, DateOnly EndDate)
-    : IQuery<IReadOnlyList<ApartmentResponse>>;
+    : IQuery<IReadOnlyList<ApartmentDto>>;
 
 internal sealed class SearchApartmentsQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
-    : IQueryHandler<SearchApartmentsQuery, IReadOnlyList<ApartmentResponse>>
+    : IQueryHandler<SearchApartmentsQuery, IReadOnlyList<ApartmentDto>>
 {
     private static readonly int[] ActiveBookingStatuses =
     [
@@ -20,13 +20,13 @@ internal sealed class SearchApartmentsQueryHandler(ISqlConnectionFactory sqlConn
         (int)BookingStatus.Completed
     ];
 
-    public async Task<Result<IReadOnlyList<ApartmentResponse>>> Handle(
+    public async Task<Result<IReadOnlyList<ApartmentDto>>> Handle(
         SearchApartmentsQuery query,
         CancellationToken cancellationToken)
     {
         if (query.StartDate > query.EndDate)
         {
-            return Result.Success<IReadOnlyList<ApartmentResponse>>([]);
+            return Result.Success<IReadOnlyList<ApartmentDto>>([]);
         }
 
         IDbConnection dbConnection = sqlConnectionFactory.CreateConnection();
@@ -57,8 +57,8 @@ internal sealed class SearchApartmentsQueryHandler(ISqlConnectionFactory sqlConn
                            )
                            """;
 
-        IEnumerable<ApartmentResponse> apartments = await dbConnection
-            .QueryAsync<ApartmentResponse, AddressResponse, ApartmentResponse>(
+        IEnumerable<ApartmentDto> apartments = await dbConnection
+            .QueryAsync<ApartmentDto, AddressDto, ApartmentDto>(
                 sql,
                 (apartment, address) =>
                 {
@@ -73,6 +73,6 @@ internal sealed class SearchApartmentsQueryHandler(ISqlConnectionFactory sqlConn
                 },
                 splitOn: "Country");
 
-        return Result.Success<IReadOnlyList<ApartmentResponse>>(apartments.ToList());
+        return Result.Success<IReadOnlyList<ApartmentDto>>(apartments.ToList());
     }
 }

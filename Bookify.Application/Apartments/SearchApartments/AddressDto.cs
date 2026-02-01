@@ -1,6 +1,6 @@
 ﻿namespace Bookify.Application.Apartments.SearchApartments;
 
-public sealed record AddressResponse
+public sealed record AddressDto
 {
     public required string Country { get; init; }
 

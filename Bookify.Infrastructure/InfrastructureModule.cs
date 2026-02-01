@@ -5,15 +5,18 @@ using Bookify.Domain.Abstractions;
 using Bookify.Domain.Apartments;
 using Bookify.Domain.Bookings;
 using Bookify.Domain.Users;
+using Bookify.Infrastructure.Authentication;
 using Bookify.Infrastructure.Clock;
 using Bookify.Infrastructure.Dapper;
 using Bookify.Infrastructure.EfCore;
 using Bookify.Infrastructure.EfCore.Repositories;
 using Bookify.Infrastructure.Notifications;
 using Dapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Bookify.Infrastructure;
 
@@ -44,6 +47,14 @@ public static class InfrastructureModule
             new SqlConnectionFactory(configuration.GetConnectionString("Default")!));
 
         SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
+
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer();
+
+        services.Configure<AuthenticationOptions>(configuration.GetSection(AuthenticationOptions.SectionName));
+
+        services.ConfigureOptions<JwtBearerSetupOptions>();
 
         return services;
     }

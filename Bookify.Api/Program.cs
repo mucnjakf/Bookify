@@ -19,12 +19,14 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 
     app.ApplyMigrations();
-    // app.SeedData();
 }
 
 app.UseHttpsRedirection();
 
 app.UseCustomExceptionHandler();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

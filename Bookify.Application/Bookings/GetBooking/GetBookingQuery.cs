@@ -7,12 +7,12 @@ using Dapper;
 
 namespace Bookify.Application.Bookings.GetBooking;
 
-public sealed record GetBookingQuery(Guid BookingId) : IQuery<BookingResponse>;
+public sealed record GetBookingQuery(Guid BookingId) : IQuery<BookingDto>;
 
 internal sealed class GetBookingQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
-    : IQueryHandler<GetBookingQuery, BookingResponse>
+    : IQueryHandler<GetBookingQuery, BookingDto>
 {
-    public async Task<Result<BookingResponse>> Handle(GetBookingQuery query, CancellationToken cancellationToken)
+    public async Task<Result<BookingDto>> Handle(GetBookingQuery query, CancellationToken cancellationToken)
     {
         using IDbConnection dbConnection = sqlConnectionFactory.CreateConnection();
 
@@ -37,7 +37,7 @@ internal sealed class GetBookingQueryHandler(ISqlConnectionFactory sqlConnection
                            WHERE id = @BookingId
                            """;
 
-        var booking = await dbConnection.QueryFirstOrDefaultAsync<BookingResponse>(
+        var booking = await dbConnection.QueryFirstOrDefaultAsync<BookingDto>(
             sql,
             new
             {
@@ -45,7 +45,7 @@ internal sealed class GetBookingQueryHandler(ISqlConnectionFactory sqlConnection
             });
 
         return booking is null
-            ? Result.Failure<BookingResponse>(BookingErrors.NotFound)
+            ? Result.Failure<BookingDto>(BookingErrors.NotFound)
             : Result.Success(booking);
     }
 }
