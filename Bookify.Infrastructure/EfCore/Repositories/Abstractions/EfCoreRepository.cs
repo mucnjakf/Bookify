@@ -11,5 +11,5 @@ internal abstract class EfCoreRepository<T>(ApplicationDbContext dbContext)
     public async Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         => await DbContext.Set<T>().FirstOrDefaultAsync(entity => entity.Id == id, cancellationToken);
 
-    public void Add(T entity) => DbContext.Add(entity);
+    public virtual void Add(T entity) => DbContext.Add(entity);
 }

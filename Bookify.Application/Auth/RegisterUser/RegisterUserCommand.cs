@@ -4,7 +4,7 @@ using Bookify.Domain.Abstractions;
 using Bookify.Domain.Users;
 using FluentValidation;
 
-namespace Bookify.Application.Users.RegisterUser;
+namespace Bookify.Application.Auth.RegisterUser;
 
 public sealed record RegisterUserCommand(
     string Email,
@@ -35,7 +35,7 @@ internal sealed class RegisterUserCommandHandler(
         userRepository.Add(user);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return user.Id;
+        return Result.Success(user.Id);
     }
 }
 

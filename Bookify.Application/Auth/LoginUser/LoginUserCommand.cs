@@ -3,7 +3,7 @@ using Bookify.Application.Abstractions.Messaging;
 using Bookify.Domain.Abstractions;
 using Bookify.Domain.Users;
 
-namespace Bookify.Application.Users.LoginUser;
+namespace Bookify.Application.Auth.LoginUser;
 
 public sealed record LoginUserCommand(string Email, string Password) : ICommand<TokenDto>;
 

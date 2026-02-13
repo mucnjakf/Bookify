@@ -1,6 +1,6 @@
 ﻿using Bookify.Api.Controllers.Requests;
-using Bookify.Application.Users.LoginUser;
-using Bookify.Application.Users.RegisterUser;
+using Bookify.Application.Auth.LoginUser;
+using Bookify.Application.Auth.RegisterUser;
 using Bookify.Domain.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
