@@ -11,11 +11,11 @@ internal sealed class AdminAuthorizationDelegatingHandler(IOptions<KeycloakOptio
         HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
-        AuthorizationToken authorizationToken = await GetAuthorizationTokenAsync(cancellationToken);
+        AuthorizationTokenDto authorizationTokenDto = await GetAuthorizationTokenAsync(cancellationToken);
 
         request.Headers.Authorization = new AuthenticationHeaderValue(
             JwtBearerDefaults.AuthenticationScheme,
-            authorizationToken.AccessToken);
+            authorizationTokenDto.AccessToken);
 
         HttpResponseMessage httpResponseMessage = await base.SendAsync(request, cancellationToken);
 
@@ -24,7 +24,7 @@ internal sealed class AdminAuthorizationDelegatingHandler(IOptions<KeycloakOptio
         return httpResponseMessage;
     }
 
-    private async Task<AuthorizationToken> GetAuthorizationTokenAsync(CancellationToken cancellationToken)
+    private async Task<AuthorizationTokenDto> GetAuthorizationTokenAsync(CancellationToken cancellationToken)
     {
         var authorizationRequestParameters = new KeyValuePair<string, string>[]
         {
@@ -45,9 +45,9 @@ internal sealed class AdminAuthorizationDelegatingHandler(IOptions<KeycloakOptio
 
         httpResponseMessage.EnsureSuccessStatusCode();
 
-        AuthorizationToken authorizationToken = await httpResponseMessage.Content
-            .ReadFromJsonAsync<AuthorizationToken>(cancellationToken) ?? throw new ApplicationException();
+        AuthorizationTokenDto authorizationTokenDto = await httpResponseMessage.Content
+            .ReadFromJsonAsync<AuthorizationTokenDto>(cancellationToken) ?? throw new ApplicationException();
 
-        return authorizationToken;
+        return authorizationTokenDto;
     }
 }

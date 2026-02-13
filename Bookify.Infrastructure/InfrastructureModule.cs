@@ -69,6 +69,13 @@ public static class InfrastructureModule
             })
             .AddHttpMessageHandler<AdminAuthorizationDelegatingHandler>();
 
+        services.AddHttpClient<IJwtService, JwtService>((serviceProvider, httpClient) =>
+        {
+            KeycloakOptions keycloakOptions = serviceProvider.GetRequiredService<IOptions<KeycloakOptions>>().Value;
+
+            httpClient.BaseAddress = new Uri(keycloakOptions.TokenUrl);
+        });
+
         return services;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Bookify.Api.Controllers.Requests;
+using Bookify.Application.Users.LoginUser;
 using Bookify.Application.Users.RegisterUser;
 using Bookify.Domain.Abstractions;
 using MediatR;
@@ -29,6 +30,24 @@ public sealed class AuthController(ISender sender) : ControllerBase
         if (result.IsFailure)
         {
             return BadRequest();
+        }
+
+        return Ok(result.Value);
+    }
+
+    [AllowAnonymous]
+    [HttpPost("login")]
+    public async Task<ActionResult> LoginUser(
+        [FromBody] LoginUserRequest request,
+        CancellationToken cancellationToken)
+    {
+        var command = new LoginUserCommand(request.Email, request.Password);
+
+        Result<TokenDto> result = await sender.Send(command, cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return Unauthorized(result.Error);
         }
 
         return Ok(result.Value);
