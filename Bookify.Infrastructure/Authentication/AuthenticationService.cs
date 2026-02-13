@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using Bookify.Application.Abstractions.Authentication;
 using Bookify.Domain.Users;
 
@@ -13,9 +14,9 @@ internal sealed class AuthenticationService(HttpClient httpClient) : IAuthentica
         string password,
         CancellationToken cancellationToken = default)
     {
-        KeycloakUserDto keycloakUserDto = KeycloakUserDto.FromUser(user);
+        KeycloakRegisterUserDto keycloakRegisterUserDto = KeycloakRegisterUserDto.FromUser(user);
 
-        keycloakUserDto.Credentials =
+        keycloakRegisterUserDto.Credentials =
         [
             new KeycloakCredentialDto
             {
@@ -26,7 +27,7 @@ internal sealed class AuthenticationService(HttpClient httpClient) : IAuthentica
         ];
 
         HttpResponseMessage? response = await httpClient
-            .PostAsJsonAsync("users", keycloakUserDto, cancellationToken);
+            .PostAsJsonAsync("users", keycloakRegisterUserDto, cancellationToken);
 
         return ExtractIdentityIdFromLocationHeader(response);
     }

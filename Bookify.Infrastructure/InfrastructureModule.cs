@@ -1,4 +1,5 @@
-﻿using Bookify.Application.Abstractions.Clock;
+﻿using Bookify.Application.Abstractions.Authentication;
+using Bookify.Application.Abstractions.Clock;
 using Bookify.Application.Abstractions.Data;
 using Bookify.Application.Abstractions.Notifications;
 using Bookify.Domain.Abstractions;
@@ -41,7 +42,7 @@ public static class InfrastructureModule
         services.AddScoped<IBookingRepository, BookingEfCoreRepository>();
         services.AddScoped<IApartmentRepository, ApartmentEfCoreRepository>();
 
-        services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
+        services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
 
         services.AddSingleton<ISqlConnectionFactory>(_ =>
             new SqlConnectionFactory(configuration.GetConnectionString("Default")!));
@@ -55,6 +56,18 @@ public static class InfrastructureModule
         services.Configure<AuthenticationOptions>(configuration.GetSection(AuthenticationOptions.SectionName));
 
         services.ConfigureOptions<JwtBearerSetupOptions>();
+
+        services.Configure<KeycloakOptions>(configuration.GetSection(KeycloakOptions.SectionName));
+
+        services.AddTransient<AdminAuthorizationDelegatingHandler>();
+
+        services.AddHttpClient<IAuthenticationService, AuthenticationService>((serviceProvider, httpClient) =>
+            {
+                KeycloakOptions keycloakOptions = serviceProvider.GetRequiredService<IOptions<KeycloakOptions>>().Value;
+
+                httpClient.BaseAddress = new Uri(keycloakOptions.AdminUrl);
+            })
+            .AddHttpMessageHandler<AdminAuthorizationDelegatingHandler>();
 
         return services;
     }

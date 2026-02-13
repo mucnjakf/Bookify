@@ -2,8 +2,8 @@
 
 namespace Bookify.Infrastructure.Authentication;
 
-internal sealed class AuthorizationToken
+public sealed class AuthorizationToken
 {
     [JsonPropertyName("access_token")]
-    internal required string AccessToken { get; init; }
+    public required string AccessToken { get; init; }
 }
