@@ -16,7 +16,7 @@
       - ${USERPROFILE}/.aspnet/https:/https:ro
     depends_on:
       - bookify.db
-  
+    
   bookify.db:
     image: postgres:17.2
     container_name: Bookify.Db

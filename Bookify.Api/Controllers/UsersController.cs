@@ -1,5 +1,6 @@
 ﻿using Bookify.Application.Users.GetCurrentUser;
 using Bookify.Domain.Abstractions;
+using Bookify.Infrastructure.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace Bookify.Api.Controllers;
 public sealed class UsersController(ISender sender) : ControllerBase
 {
     [HttpGet("me")]
-    [Authorize(Roles = Roles.Registered)]
+    [HasPermission(Permissions.UsersRead)]
     public async Task<ActionResult> GetCurrentUser(CancellationToken cancellationToken)
     {
         var query = new GetCurrentUserQuery();

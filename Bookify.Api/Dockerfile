@@ -12,6 +12,11 @@ COPY . .
 WORKDIR "/src/Bookify.Api"
 RUN dotnet build "./Bookify.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
+FROM build AS migrations
+WORKDIR /src
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="${PATH}:/root/.dotnet/tools"
+
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./Bookify.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false

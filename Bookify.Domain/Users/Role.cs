@@ -9,4 +9,6 @@ public sealed class Role(int id, string name)
     public string Name { get; init; } = name;
 
     public ICollection<User> Users { get; init; } = [];
+    
+    public ICollection<Permission> Permissions { get; init; } = [];
 }
