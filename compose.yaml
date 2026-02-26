@@ -16,7 +16,7 @@
       - ${USERPROFILE}/.aspnet/https:/https:ro
     depends_on:
       - bookify.db
-    
+  
   bookify.db:
     image: postgres:17.2
     container_name: Bookify.Db
@@ -40,3 +40,12 @@
       - ./.containers/identity_data:/opt/keycloak/data
     ports:
       - "18080:8080"
+  
+  bookify-seq:
+    image: datalust/seq:latest
+    container_name: Bookify.Seq
+    environment:
+      - ACCEPT_EULA=y
+    ports:
+      - "5341:5341"
+      - "8081:80"   
