@@ -102,6 +102,11 @@ public static class InfrastructureModule
 
         services.AddSingleton<ICacheService, CacheService>();
 
+        services.AddHealthChecks()
+            .AddNpgSql(configuration.GetConnectionString("Default")!)
+            .AddRedis(configuration.GetConnectionString("Cache")!)
+            .AddUrlGroup(new Uri(configuration["Keycloak:BaseUrl"]!), HttpMethod.Get, "keycloak");
+
         return services;
     }
 }
