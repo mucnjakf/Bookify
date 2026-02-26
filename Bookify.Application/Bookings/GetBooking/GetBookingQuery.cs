@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using Bookify.Application.Abstractions.Authentication;
+using Bookify.Application.Abstractions.Caching;
 using Bookify.Application.Abstractions.Data;
 using Bookify.Application.Abstractions.Messaging;
 using Bookify.Domain.Abstractions;
@@ -8,7 +9,12 @@ using Dapper;
 
 namespace Bookify.Application.Bookings.GetBooking;
 
-public sealed record GetBookingQuery(Guid BookingId) : IQuery<BookingDto>;
+public sealed record GetBookingQuery(Guid BookingId) : ICachedQuery<BookingDto>
+{
+    public string CacheKey => $"bookings-{BookingId}";
+
+    public TimeSpan? Expiration => null;
+}
 
 internal sealed class GetBookingQueryHandler(ISqlConnectionFactory sqlConnectionFactory, IUserContext userContext)
     : IQueryHandler<GetBookingQuery, BookingDto>

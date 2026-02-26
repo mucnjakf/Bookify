@@ -1,4 +1,5 @@
 ﻿using Bookify.Application.Abstractions.Authentication;
+using Bookify.Application.Abstractions.Caching;
 using Bookify.Application.Abstractions.Clock;
 using Bookify.Application.Abstractions.Data;
 using Bookify.Application.Abstractions.Notifications;
@@ -8,6 +9,7 @@ using Bookify.Domain.Bookings;
 using Bookify.Domain.Users;
 using Bookify.Infrastructure.Authentication;
 using Bookify.Infrastructure.Authorization;
+using Bookify.Infrastructure.Caching;
 using Bookify.Infrastructure.Clock;
 using Bookify.Infrastructure.Dapper;
 using Bookify.Infrastructure.EfCore;
@@ -93,6 +95,12 @@ public static class InfrastructureModule
         services.AddTransient<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
         services.AddTransient<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
+
+        string connectionString = configuration.GetConnectionString("Cache")!;
+
+        services.AddStackExchangeRedisCache(options => options.Configuration = connectionString);
+
+        services.AddSingleton<ICacheService, CacheService>();
 
         return services;
     }

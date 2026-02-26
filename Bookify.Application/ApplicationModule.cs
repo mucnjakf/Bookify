@@ -19,6 +19,7 @@ public static class ApplicationModule
 
             configure.AddOpenBehavior(typeof(LoggingBehavior<,>));
             configure.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            configure.AddOpenBehavior(typeof(QueryCachingBehavior<,>));
         });
 
         services.AddValidatorsFromAssembly(typeof(ApplicationModule).Assembly);
