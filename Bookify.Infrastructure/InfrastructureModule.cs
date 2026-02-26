@@ -15,6 +15,7 @@ using Bookify.Infrastructure.Dapper;
 using Bookify.Infrastructure.EfCore;
 using Bookify.Infrastructure.EfCore.Repositories;
 using Bookify.Infrastructure.Notifications;
+using Bookify.Infrastructure.Outbox;
 using Dapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,6 +24,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Quartz;
 using AuthenticationOptions = Bookify.Infrastructure.Authentication.AuthenticationOptions;
 using AuthenticationService = Bookify.Infrastructure.Authentication.AuthenticationService;
 using IAuthenticationService = Bookify.Application.Abstractions.Authentication.IAuthenticationService;
@@ -106,6 +108,14 @@ public static class InfrastructureModule
             .AddNpgSql(configuration.GetConnectionString("Default")!)
             .AddRedis(configuration.GetConnectionString("Cache")!)
             .AddUrlGroup(new Uri(configuration["Keycloak:BaseUrl"]!), HttpMethod.Get, "keycloak");
+
+        services.Configure<OutboxOptions>(configuration.GetSection(OutboxOptions.SectionName));
+
+        services.AddQuartz();
+
+        services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
+
+        services.ConfigureOptions<ProcessOutboxMessagesJobSetup>();
 
         return services;
     }
