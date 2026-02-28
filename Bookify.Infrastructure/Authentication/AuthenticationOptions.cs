@@ -6,9 +6,9 @@ public sealed class AuthenticationOptions
 
     public required string Audience { get; init; }
 
-    public required string MetadataUrl { get; init; }
+    public required string MetadataUrl { get; set; }
 
     public required bool RequireHttpsMetadata { get; init; }
 
-    public required string Issuer { get; init; }
+    public required string Issuer { get; set; }
 }
