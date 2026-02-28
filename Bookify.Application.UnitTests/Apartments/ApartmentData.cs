@@ -1,16 +1,16 @@
 ﻿using Bookify.Domain.Apartments;
 using Bookify.Domain.Shared;
 
-namespace Bookify.Domain.UnitTests.Apartments;
+namespace Bookify.Application.UnitTests.Apartments;
 
-internal static class ApartmentData
+internal sealed class ApartmentData
 {
-    internal static Apartment Create(Money price, Money? cleaningFee = null) => new(
+    internal static Apartment Create() => new(
         Guid.NewGuid(),
         new Name("Test apartment"),
         new Description("Test description"),
         new Address("Country", "State", "Zip code", "City", "Street"),
-        price,
-        cleaningFee ?? Money.Zero(),
+        new Money(100.0m, Currency.Usd),
+        Money.Zero(),
         []);
 }
