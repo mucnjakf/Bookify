@@ -4,9 +4,9 @@ public sealed class KeycloakOptions
 {
     internal const string SectionName = "Keycloak";
 
-    public required string AdminUrl { get; init; }
+    public required string AdminUrl { get; set; }
 
-    public required string TokenUrl { get; init; }
+    public required string TokenUrl { get; set; }
 
     public required string AdminClientId { get; init; }
 

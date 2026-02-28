@@ -25,6 +25,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 
     app.ApplyMigrations();
+    app.SeedData();
 }
 
 app.UseHttpsRedirection();
