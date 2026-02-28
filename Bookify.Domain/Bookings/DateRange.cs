@@ -6,7 +6,7 @@ public sealed record DateRange
 
     public DateOnly End { get; private init; }
 
-    internal int LengthInDays => End.DayNumber - Start.DayNumber;
+    public int LengthInDays => End.DayNumber - Start.DayNumber;
 
     private DateRange() { }
 

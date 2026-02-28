@@ -21,7 +21,7 @@ public sealed class Apartment : Entity
 
     private Apartment() { }
 
-    internal Apartment(
+    public Apartment(
         Guid id,
         Name name,
         Description description,

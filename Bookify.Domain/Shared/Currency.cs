@@ -3,7 +3,7 @@
 public sealed record Currency
 {
     internal static readonly Currency None = new(string.Empty);
-    private static readonly Currency Usd = new("USD");
+    public static readonly Currency Usd = new("USD");
     private static readonly Currency Eur = new("EUR");
 
     private static readonly IReadOnlyCollection<Currency> All = [Usd, Eur];
