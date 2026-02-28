@@ -39,7 +39,7 @@ internal sealed class RegisterUserCommandHandler(
     }
 }
 
-public sealed class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
+internal sealed class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
 {
     public RegisterUserCommandValidator()
     {

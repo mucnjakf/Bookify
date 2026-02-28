@@ -25,6 +25,7 @@
     <ItemGroup>
         <InternalsVisibleTo Include="Bookify.Application.IntegrationTests"/>
         <InternalsVisibleTo Include="Bookify.Api.FunctionalTests"/>
+        <InternalsVisibleTo Include="Bookify.ArchitectureTests"/>
     </ItemGroup>
 
 </Project>
