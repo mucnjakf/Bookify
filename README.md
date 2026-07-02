@@ -1,0 +1,16 @@
+- configure github
+- add readme
+- add favicon
+- https://github.com/Tmaturano/Bookify/
+- clean architecture
+- ddd and domain layer
+- cqrs, mediatr
+- dapper
+- validation
+- logging
+- concurrency control
+- keycloak
+- serilog
+- redis
+- outbox pattern
+- testing
